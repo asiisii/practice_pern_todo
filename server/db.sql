@@ -1,0 +1,7 @@
+CREATE DATABASE perntodo;
+
+CREATE TABLE todo(
+  todoId SERIAL PRIMARY KEY,
+  text VARCHAR(255) NOT NULL,
+  isComplete BOOLEAN DEFAULT false
+);
