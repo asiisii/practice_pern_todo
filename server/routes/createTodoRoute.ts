@@ -4,12 +4,9 @@ import client from '../config/db'
 const createTodo = async (req: Request, res: Response) => {
 	try {
 		const { text } = req.body
-		const newTodo = await client.query('INSERT INTO todo (text) VALUES($1)', [
+		const newTodo = await client.query('INSERT INTO todo (text) VALUES($1) RETURNING *', [
 			text,
 		])
-    console.log('====================================');
-    console.log({newTodo});
-    console.log('====================================');
 		res.status(201).json(newTodo.rows[0])
 	} catch (error) {
 		console.log('====================================')
