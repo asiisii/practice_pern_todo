@@ -24,3 +24,25 @@ export const updateTextTodo = async (req: Request, res: Response) => {
 		res.status(400).json({ message: error })
 	}
 }
+
+export const updateIsCompleteTodo = async (req: Request, res: Response) => {
+	try {
+		const { id } = req.params
+
+		const todoExists = checkTodoExists(id)
+
+		if (!todoExists) {
+			res.status(404).json({ message: 'Todo not found' })
+			return
+		}
+
+		const updatedTodo = await client.query(
+			'UPDATE TODO SET iscomplete = NOT iscomplete WHERE todoid = $1 RETURNING *',
+			[id]
+		)
+
+		res.json(updatedTodo)
+	} catch (error) {
+		res.status(400).json({ message: error })
+	}
+}
