@@ -19,7 +19,6 @@ const AddTodoForm = () => {
 	const onSubmit = (data: { text: string }) => {
 		const newData = {
 			text: data.text,
-			isComplete: false,
 		}
 
 		addTodo(newData)

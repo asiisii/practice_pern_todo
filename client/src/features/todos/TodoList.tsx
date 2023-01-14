@@ -2,9 +2,9 @@ import TodoItem from './TodoItem'
 
 type TodoListProps = {
 	todoList: {
-		_id: string
+		todoid: string
 		text: string
-		isComplete: boolean
+		iscomplete: boolean
 	}[]
 }
 
@@ -13,10 +13,10 @@ const TodoList = ({ todoList }: TodoListProps) => {
 		<ul className='max-h-[90vh] min-w-full overflow-y-auto'>
 			{todoList.map(todo => (
 				<TodoItem
-					id={todo._id}
+					todoid={todo.todoid}
 					text={todo.text}
-					isComplete={todo.isComplete}
-					key={todo._id}
+					isComplete={todo.iscomplete}
+					key={`${window.crypto.getRandomValues}`}
 				/>
 			))}
 		</ul>

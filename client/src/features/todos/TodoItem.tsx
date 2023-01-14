@@ -7,12 +7,12 @@ import {
 import { FaTrashAlt, FaEdit, FaWindowClose, FaSave } from 'react-icons/fa'
 
 type TodoItemProps = {
-	id: string
+	todoid: string
 	text: string
 	isComplete: boolean
 }
 
-const TodoItem = ({ id, text, isComplete }: TodoItemProps) => {
+const TodoItem = ({ todoid, text, isComplete }: TodoItemProps) => {
 	const [show, setShow] = useState(false)
 	const [description, setDescription] = useState(text)
 
@@ -24,9 +24,9 @@ const TodoItem = ({ id, text, isComplete }: TodoItemProps) => {
 
 	const updateTodoItem = () => {
 		const updatedTodo = {
-			id: id,
+			todoid,
 			text: description,
-			isComplete: isComplete,
+			iscomplete: isComplete,
 		}
 		updateTodo(updatedTodo)
 		showEditModal()
@@ -36,7 +36,7 @@ const TodoItem = ({ id, text, isComplete }: TodoItemProps) => {
 		<form
 			className='flex items-center min-w-sm justify-between mt-2 bg-[#A98E4D] rounded-xl p-2'
 			onSubmit={e => e.preventDefault()}
-			key={id}
+			key={todoid}
 		>
 			<input
 				type='text'
@@ -55,14 +55,14 @@ const TodoItem = ({ id, text, isComplete }: TodoItemProps) => {
 		</form>
 	) : (
 		<div
-			key={id}
+			key={todoid}
 			className='flex justify-between mt-2 bg-[#A98E4D] rounded-xl p-2'
 		>
 			<section className='flex items-center'>
 				<input
 					type='checkbox'
 					checked={isComplete}
-					onChange={() => toggleComplete(id)}
+					onChange={() => toggleComplete(todoid)}
 					className='items-center'
 				/>
 				<div
@@ -77,7 +77,7 @@ const TodoItem = ({ id, text, isComplete }: TodoItemProps) => {
 				<button className='pr-6' onClick={showEditModal}>
 					<FaEdit color='#05AEA0' />
 				</button>
-				<button onClick={() => deleteTodo(id)}>
+				<button onClick={() => deleteTodo(todoid)}>
 					<FaTrashAlt color='red' />
 				</button>
 			</section>

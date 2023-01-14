@@ -2,18 +2,17 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 interface Todo {
 	text: string
-	isComplete: boolean
 }
 
 type AllTodos = {
-	_id: string
+	todoid: string
 	text: string
-	isComplete: boolean
+	iscomplete: boolean
 }[]
 
 export const todoApiSlice = createApi({
 	reducerPath: 'api',
-	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5001' }),
+	baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000' }),
 	tagTypes: ['Todos'],
 	endpoints: builder => ({
 		getTodo: builder.query({
@@ -48,11 +47,11 @@ export const todoApiSlice = createApi({
 		}),
 		updateTodo: builder.mutation({
 			query: (updatedTodo: {
-				id: string
+				todoid: string
 				text: string
-				isComplete: boolean
+				iscomplete: boolean
 			}) => ({
-				url: `/todos/${updatedTodo.id}`,
+				url: `/todos/${updatedTodo.todoid}`,
 				method: 'PATCH',
 				body: JSON.stringify(updatedTodo),
 				headers: {
